@@ -81,7 +81,7 @@ void Create_New_account(){
             cin >> username;
             cout << endl << "Confirm username: ";
             cin >> username2;
-        } while (username.compare(username2) != 0 || exist_username(U.get_username()));
+        } while (username.compare(username2) != 0 || exist_username(username));
 
         U.set_username(username);
 
