@@ -186,21 +186,28 @@ int get_last_ip(){
 void Login_account(){
     system("cls");
     ifstream infile("DATA/USER_NAM_PASS.txt");
-    string PASSWORD, PASSWORD1;
-    string USERNAME , USERNAME1;
+    string stored_username, stored_password;
+    string entered_username, entered_password;
+    int account_ip;
 
-     cout << "\n  Your username :";
-     cin >>PASSWORD1;
-     cout << "\n Your password :";
-     cin >> PASSWORD;
+    cout << "\n  Your username :";
+    cin >> entered_username;
+    cout << "\n Your password :";
+    cin >> entered_password;
 
-    while (infile >> PASSWORD >> USERNAME) {
-        if (PASSWORD.compare(PASSWORD1)==0 && USERNAME.compare(USERNAME1)==0 ) {
-            cout << "\n Welcome to you bank !!";
+    bool authenticated = false;
+    while (infile >> stored_username >> stored_password >> account_ip) {
+        if (stored_username == entered_username && stored_password == entered_password) {
+            authenticated = true;
             break;
         }
     }
     infile.close();
+
+    if (authenticated)
+        cout << "\n Welcome to your bank !!";
+    else
+        cout << "\n Invalid username or password.";
 };
 
 void Set_Data(USER U){
