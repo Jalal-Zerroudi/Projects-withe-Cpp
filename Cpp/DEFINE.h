@@ -147,9 +147,9 @@ int exist_account(string First_nam, string last_name, int Phone_Number,int Age){
                     valid =1;
                         break;
                         }
-        infile.close();
-        return valid;
     }
+    infile.close();
+    return valid;
 }
 
 bool exist_username(string username) {
@@ -212,11 +212,11 @@ void Login_account(){
 
 void Set_Data(USER U){
 
-    ofstream outfile1("DATA/USER_INFO.txt");
+    ofstream outfile1("DATA/USER_INFO.txt", ios::app);
     outfile1 << U.first_name << " " << U.Last_name << " " << U.phone_Number << " " << U.age << endl;
     outfile1.close();
 
-    ofstream outfile("DATA/USER_NAM_PASS.txt");
+    ofstream outfile("DATA/USER_NAM_PASS.txt", ios::app);
     int IP=for_set_IP();
     outfile << U.get_username() << " " << U.get_password() << " " << IP <<endl;
     outfile.close();
