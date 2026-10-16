@@ -43,7 +43,7 @@ void Home_Choose(){
 
 void Create_New_account(){
     system("cls");
-    USER U = *new USER();
+    USER U;
 
     cout << "\n\t Give voter information's .";
 
@@ -177,7 +177,7 @@ int for_set_IP(){
 
 int get_last_ip(){
     ifstream infile("IP/ALL_IP");
-    int IP;
+    int IP = 0;
     while( infile >> IP) { }
     infile.close();
     return IP;
