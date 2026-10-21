@@ -155,9 +155,10 @@ int exist_account(string First_nam, string last_name, int Phone_Number,int Age){
 bool exist_username(string username) {
     bool valid = false;
     ifstream infile("DATA/USER_NAM_PASS.txt");
-    string username2;
-    while (infile >> username2) {
-        if (username.compare(username2)==0){
+    string stored_username, stored_password;
+    int account_ip;
+    while (infile >> stored_username >> stored_password >> account_ip) {
+        if (username == stored_username){
             valid = true;
             cout << "Change Username !!"<<endl;
             break;
