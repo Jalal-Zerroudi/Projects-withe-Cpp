@@ -27,7 +27,7 @@ Run the program from the same working directory each time: its relative paths de
 | `DATA/USER_NAM_PASS.txt` | One line per account: `username password account_id` |
 | `IP/ALL_IP` | Whitespace-separated integer identifiers; the last readable value is used to calculate the next identifier |
 
-Account records are appended, but `Set_Data` does **not** append the new identifier to `IP/ALL_IP`. If that file is absent or empty, the calculated identifier is 1; repeated registrations therefore do not guarantee unique identifiers.
+Account records and allocated identifiers are appended. `Set_Data` records each new identifier in `IP/ALL_IP`, so successive registrations continue from the last stored value. If that file is absent or empty, the first calculated identifier is 1. The `DATA/` and `IP/` directories must still exist before registration.
 
 This is a learning prototype, not a secure banking system. Passwords are stored as plain text, input is whitespace-delimited, and the separate file writes are not transactional. Use only invented names and disposable test credentials, never real banking details or a password used elsewhere. Keep generated account files private.
 

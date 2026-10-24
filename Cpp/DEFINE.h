@@ -221,6 +221,10 @@ void Set_Data(USER U){
     int IP=for_set_IP();
     outfile << U.get_username() << " " << U.get_password() << " " << IP <<endl;
     outfile.close();
+
+    ofstream ip_file("IP/ALL_IP", ios::app);
+    ip_file << IP << endl;
+    ip_file.close();
 }
 
 #endif //PROJECT_BANK_CPP_DEFINE_H
