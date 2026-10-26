@@ -33,4 +33,6 @@ This is a learning prototype, not a secure banking system. Passwords are stored 
 
 ## Build notes
 
-The sources include `<unistd.h>` and also call `system("cls")`. These use different platform conventions, so the project may need small platform-specific adjustments to compile and run in a given environment. Build from the repository root with a C++ compiler after resolving those platform dependencies.
+The prototype rejects a registration only when all four identity fields (first name, last name, phone number, and age) match the same stored record. Reusing one field on its own does not make an account a duplicate.
+
+The sources call `system("cls")`, which is Windows-specific. On other platforms the program still compiles, but clearing the console may print a shell error unless that call is adapted. Build from the repository root with a C++ compiler.

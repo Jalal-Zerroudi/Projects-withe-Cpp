@@ -113,43 +113,18 @@ void Create_New_account(){
 }
 
 int exist_account(string First_nam, string last_name, int Phone_Number,int Age){
-    int valid = 0;
     ifstream infile("DATA/USER_INFO.txt");
-    string First_Nam,Last_Nam;
-    int phone,AGE;
-    while(infile >> First_Nam >> Last_Nam >> phone >> AGE){
-        if(First_nam.compare(First_Nam)==0){
-            cout << " change the first Nam" << endl;
-            cout << "Waiting for 5 seconds..." << endl;
-            sleep(5);
-            Create_New_account();
-        valid =1;
-           break;
-            }else if(Last_Nam.compare(last_name) == 0){
-                cout << " change the last Nam" << endl;
-                cout << "Waiting for 5 seconds..." << endl;
-                sleep(5);
-                Create_New_account();
-            valid =1;
-                break;
-                }else if(phone == Phone_Number){
-                    cout << " change the phone number" << endl;
-                    cout << "Waiting for 5 seconds..." << endl;
-                    sleep(5);
-                    Create_New_account();
-                valid =1;
-                    break;
-                    }else if(AGE == Age){
-                        cout << " change the age" << endl;
-                        cout << "Waiting for 5 seconds..." << endl;
-                        sleep(5);
-                        Create_New_account();
-                    valid =1;
-                        break;
-                        }
+    string First_Nam, Last_Nam;
+    int phone, AGE;
+
+    while (infile >> First_Nam >> Last_Nam >> phone >> AGE) {
+        if (First_nam == First_Nam && last_name == Last_Nam &&
+            Phone_Number == phone && Age == AGE) {
+            cout << "An account with the same information already exists." << endl;
+            return 1;
+        }
     }
-    infile.close();
-    return valid;
+    return 0;
 }
 
 bool exist_username(string username) {
