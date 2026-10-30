@@ -12,7 +12,7 @@ void Home_Choose();
 void Create_New_account();
     int exist_account(string First_nam, string last_name, int Phone_Number,int Age);
     bool exist_username(string username);
-    void Set_Data(USER U);
+    bool Set_Data(USER U);
     int for_set_IP();
     int get_last_ip();
 

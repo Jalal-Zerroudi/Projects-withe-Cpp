@@ -5,6 +5,8 @@
 #ifndef PROJECT_BANK_CPP_DEFINE_H
 #define PROJECT_BANK_CPP_DEFINE_H
 #include "prototype.h"
+#include <filesystem>
+#include <system_error>
 
 void Home_Choose(){
     int Choose;
@@ -94,7 +96,10 @@ void Create_New_account(){
         } while (password.compare(password2)!= 0);
 
         U.set_password(password);
-        Set_Data(U);
+        if (!Set_Data(U)) {
+            cerr << "Account creation failed: data could not be saved." << endl;
+            return;
+        }
 
         cout<<"Creating new account..."<<endl;
 
@@ -186,20 +191,44 @@ void Login_account(){
         cout << "\n Invalid username or password.";
 };
 
-void Set_Data(USER U){
+bool Set_Data(USER U){
+    std::error_code directory_error;
+    std::filesystem::create_directories("DATA", directory_error);
+    if (directory_error) {
+        cerr << "Could not create DATA directory: "
+             << directory_error.message() << endl;
+        return false;
+    }
 
-    ofstream outfile1("DATA/USER_INFO.txt", ios::app);
-    outfile1 << U.first_name << " " << U.Last_name << " " << U.phone_Number << " " << U.age << endl;
-    outfile1.close();
+    std::filesystem::create_directories("IP", directory_error);
+    if (directory_error) {
+        cerr << "Could not create IP directory: "
+             << directory_error.message() << endl;
+        return false;
+    }
 
-    ofstream outfile("DATA/USER_NAM_PASS.txt", ios::app);
-    int IP=for_set_IP();
-    outfile << U.get_username() << " " << U.get_password() << " " << IP <<endl;
-    outfile.close();
-
+    const int IP = for_set_IP();
+    ofstream info_file("DATA/USER_INFO.txt", ios::app);
+    ofstream credentials_file("DATA/USER_NAM_PASS.txt", ios::app);
     ofstream ip_file("IP/ALL_IP", ios::app);
+
+    if (!info_file.is_open() || !credentials_file.is_open() || !ip_file.is_open()) {
+        cerr << "Could not open one or more account data files." << endl;
+        return false;
+    }
+
+    info_file << U.first_name << " " << U.Last_name << " "
+              << U.phone_Number << " " << U.age << endl;
+    credentials_file << U.get_username() << " " << U.get_password()
+                     << " " << IP << endl;
     ip_file << IP << endl;
-    ip_file.close();
+
+    if (!info_file.good() || !credentials_file.good() || !ip_file.good()) {
+        cerr << "Could not write all account data." << endl;
+        return false;
+    }
+
+    return true;
 }
 
 #endif //PROJECT_BANK_CPP_DEFINE_H

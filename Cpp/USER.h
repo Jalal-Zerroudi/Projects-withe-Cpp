@@ -22,7 +22,7 @@ private :
     void set_password(string password) { this->password = password; }
     void set_username(string username) { this->username = username; }
     friend void Create_New_account();
-    friend void Set_Data(USER U);
+    friend bool Set_Data(USER U);
 
 public :
     string first_name;
