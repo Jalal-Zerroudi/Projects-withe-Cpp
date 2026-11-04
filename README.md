@@ -13,7 +13,7 @@ The bank prototype is in `Cpp/`:
 
 ## Current behavior
 
-The menu offers options to create an account, log in, recover a password, or open the admin menu. Account creation and the login flow have code in place. Password recovery and the admin action are currently placeholders; their calls are commented out.
+The menu offers options to create an account, log in, recover a password, or open the admin menu. Account creation and the login flow have code in place. Password recovery and the admin action are currently placeholders; their calls are commented out. Non-numeric and out-of-range menu choices are rejected and the same menu is shown again without growing the call stack.
 
 The code reads and writes files under `DATA/` and reads an identifier from `IP/ALL_IP`, using paths relative to the program's working directory. The program creates the `DATA/` and `IP/` directories when saving an account; the data files are then created on first use.
 
@@ -40,3 +40,4 @@ The sources call `system("cls")`, which is Windows-specific. On other platforms 
 ```bash
 g++ -std=c++17 -Wall -Wextra -pedantic Cpp/main.cpp -o bank-prototype
 ```
+

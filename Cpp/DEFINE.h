@@ -6,40 +6,47 @@
 #define PROJECT_BANK_CPP_DEFINE_H
 #include "prototype.h"
 #include <filesystem>
+#include <limits>
 #include <system_error>
 
 void Home_Choose(){
-    int Choose;
-    cout <<"\n   0 - Create a new account ;";
-    cout <<"\n   1 - login in your bank ;";
-    cout <<"\n   2 - forgot password ;";
-    cout <<"\n   3 - ADMIN ;";
-    cout <<"\n Choose one : ";
+    while (true) {
+        int Choose = -1;
+        cout <<"\n   0 - Create a new account ;";
+        cout <<"\n   1 - login in your bank ;";
+        cout <<"\n   2 - forgot password ;";
+        cout <<"\n   3 - ADMIN ;";
+        cout <<"\n Choose one : ";
 
-    cin >> Choose;
-    system("cls");
-    switch(Choose) {
-        case 0:
-            cout << "\n\t Create a new account !!"<<endl;
-            Create_New_account();
-            break;
-        case 1:
-            cout << "\n\t Login"<<endl;
-            Login_account();
-            break;
-        case 2:
-            cout << "\n\t You forgot your password"<<endl;
-            // Forgot_password();
-            break;
-        case 3:
-            cout << "\n\t Welcome ADMIN !!"<<endl;
-            // ADMIN();
-            break;
-        default:
-            system("cls");
-            cout << "\n\t Problem de Choose !!\n ";
-            Home_Choose();
-            break;
+        if (!(cin >> Choose)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "\n\t Please enter a number from 0 to 3.\n";
+            continue;
+        }
+
+        system("cls");
+        switch(Choose) {
+            case 0:
+                cout << "\n\t Create a new account !!"<<endl;
+                Create_New_account();
+                return;
+            case 1:
+                cout << "\n\t Login"<<endl;
+                Login_account();
+                return;
+            case 2:
+                cout << "\n\t You forgot your password"<<endl;
+                // Forgot_password();
+                return;
+            case 3:
+                cout << "\n\t Welcome ADMIN !!"<<endl;
+                // ADMIN();
+                return;
+            default:
+                cout << "\n\t Please enter a number from 0 to 3.\n";
+                break;
+        }
     }
 }
 
@@ -232,3 +239,4 @@ bool Set_Data(USER U){
 }
 
 #endif //PROJECT_BANK_CPP_DEFINE_H
+
