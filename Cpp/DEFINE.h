@@ -239,4 +239,3 @@ bool Set_Data(USER U){
 }
 
 #endif //PROJECT_BANK_CPP_DEFINE_H
-

@@ -40,4 +40,3 @@ The sources call `system("cls")`, which is Windows-specific. On other platforms 
 ```bash
 g++ -std=c++17 -Wall -Wextra -pedantic Cpp/main.cpp -o bank-prototype
 ```
-
