@@ -40,3 +40,28 @@ The sources call `system("cls")`, which is Windows-specific. On other platforms 
 ```bash
 g++ -std=c++17 -Wall -Wextra -pedantic Cpp/main.cpp -o bank-prototype
 ```
+
+
+## Run and smoke test
+
+Run the executable from the repository root so its relative `DATA/` and `IP/` paths resolve consistently:
+
+| Platform | Command |
+| --- | --- |
+| Windows PowerShell | `.\bank-prototype.exe` |
+| Linux or macOS | `./bank-prototype` |
+
+For a minimal persistence check, use invented, whitespace-free values:
+
+1. Choose `0`, enter a new identity, and confirm it with `1`.
+2. Enter the same new username twice and the same disposable password twice.
+3. After the success message, choose `1` and log in with those credentials.
+4. Exit, start the program again from the same directory, choose `1`, and confirm that the login still succeeds.
+
+A successful registration appends one line to each of these generated files:
+
+- `DATA/USER_INFO.txt` for the identity fields;
+- `DATA/USER_NAM_PASS.txt` for the username, plain-text password, and account identifier;
+- `IP/ALL_IP` for the allocated identifier.
+
+The generated `DATA/` and `IP/` directories are excluded by `.gitignore`. Back them up together if you need to preserve a test dataset, because the three append-only files represent one logical account store. To reset a disposable test run, remove or rename both generated directories only after the program has stopped; never do this with data you need to keep.
