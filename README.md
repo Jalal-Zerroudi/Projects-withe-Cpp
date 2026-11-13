@@ -41,6 +41,16 @@ The sources call `system("cls")`, which is Windows-specific. On other platforms 
 g++ -std=c++17 -Wall -Wextra -pedantic Cpp/main.cpp -o bank-prototype
 ```
 
+## Troubleshooting
+
+| Symptom | Likely cause and action |
+| --- | --- |
+| The compiler reports that `std::filesystem` is unavailable | Confirm that the compiler supports C++17 and that the build command includes `-std=c++17`. Older GCC releases may also require upgrading the compiler. |
+| Account files appear in an unexpected location, or a saved login cannot be found | Start the executable from the repository root. `DATA/` and `IP/` are resolved from the process working directory, not from the executable's location. |
+| Linux or macOS prints `cls: not found` | `system("cls")` is a Windows-only screen-clear command. The message does not identify a persistence failure; the prototype can continue to the next prompt. |
+| Registration reports that data could not be saved | Check that the working directory is writable and that `DATA` and `IP` are directories rather than files. The program reports directory-creation and file-open failures on standard error. |
+| Login fails after a successful registration | Restart from the same working directory and verify that `DATA/USER_NAM_PASS.txt` contains the new whitespace-delimited username, password, and account identifier. Inputs containing spaces are split into separate fields. |
+
 
 ## Run and smoke test
 
